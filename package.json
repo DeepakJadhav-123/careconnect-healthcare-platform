@@ -1,0 +1,11 @@
+{
+  "name": "careconnect-fullstack",
+  "version": "1.0.0",
+  "description": "CARECONNECT healthcare navigation and continuity demo",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "dev": "node server.js" },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  }
+}
