@@ -6,7 +6,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const db = new Database(process.env.DB_FILE || path.join(__dirname, "careconnect.db"));
 app.use(express.json({ limit: "1mb" }));
-app.use(express.static(path.join(__dirname, "public")));
+// Serve frontend assets from the repository root for easier mobile uploads.
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+app.get("/style.css", (req, res) => res.sendFile(path.join(__dirname, "style.css")));
+app.get("/app.js", (req, res) => res.sendFile(path.join(__dirname, "app.js")));
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS appointments (
@@ -126,5 +129,5 @@ app.put("/api/profile",(req,res)=>{
  db.prepare("INSERT INTO profiles(patient,email,phone,emergency_contact,consent) VALUES(?,?,?,?,?) ON CONFLICT(patient) DO UPDATE SET email=excluded.email,phone=excluded.phone,emergency_contact=excluded.emergency_contact,consent=excluded.consent").run(p,String(email||""),String(phone||""),String(emergency_contact||""),consent?1:0);
  res.json(db.prepare("SELECT * FROM profiles WHERE patient=?").get(p));
 });
-app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
+app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"index.html")));
 app.listen(PORT,()=>console.log(`CARECONNECT running on http://localhost:${PORT}`));

@@ -32,3 +32,12 @@ This is a college/demo prototype, not a production medical service. The patient 
 
 ## Deployment
 Deploy the Node app to a Node-compatible hosting provider. For persistent SQLite storage, choose a host with a persistent disk; many free server instances have ephemeral storage. Alternatively, migrate the database layer to a managed PostgreSQL service before deploying. Set `PORT` if your host requires it.
+
+
+## Files
+For easier uploading from a phone, all app files are in the repository root:
+- `index.html`
+- `style.css`
+- `app.js`
+- `server.js`
+- `package.json`
